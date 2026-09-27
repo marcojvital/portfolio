@@ -144,6 +144,18 @@
             padding-bottom: 180px;
         }
 
+        body::before {
+            position: fixed;
+            top: 0;
+            right: 14px;
+            left: 0;
+            z-index: 999;
+            height: 16px;
+            background: var(--bg);
+            content: '';
+            pointer-events: none;
+        }
+
         nav {
             /* nav becomes the distinct top card */
             background-color: #ffffff;
@@ -521,8 +533,8 @@
         }
 
         .timeline-line {
-            width: 96px;
-            min-width: 96px;
+            width: 108px;
+            min-width: 108px;
             position: relative;
             height: 520px;
         }
@@ -598,7 +610,7 @@
             display: block;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
             nav {
                 flex-wrap: wrap;
             }
@@ -716,6 +728,15 @@
                 display: flex;
             }
 
+            nav.category-open .nav-links {
+                display: flex;
+            }
+
+            nav.category-open .nav-links > a,
+            nav.category-open .nav-links > .nav-category:not([open]) {
+                display: none;
+            }
+
             nav a {
                 display: block;
             }
@@ -817,6 +838,82 @@
             font-size: 0.85rem;
         }
 
+        .quadruped-design-process-scroll {
+            max-width: 100%;
+            overflow-x: auto;
+            overscroll-behavior-inline: contain;
+        }
+
+        .quadruped-design-process {
+            --quadruped-process-step-size: clamp(120px, calc(25vw - 1.75rem), 561px);
+            display: grid;
+            grid-template-columns: repeat(4, var(--quadruped-process-step-size));
+            align-items: start;
+            gap: 1rem;
+            width: max-content;
+        }
+
+        .quadruped-design-step {
+            width: var(--quadruped-process-step-size);
+            margin: 0;
+        }
+
+        .quadruped-process-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        .quadruped-process-visual {
+            position: relative;
+            width: var(--quadruped-process-step-size);
+            height: var(--quadruped-process-step-size);
+            margin-bottom: 0.5rem;
+        }
+
+        .quadruped-process-caption {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .quadruped-process-title {
+            margin: 0 0 0.35rem;
+            color: var(--text);
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .quadruped-process-list-label {
+            margin: 0.3rem 0 0.1rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .quadruped-process-caption ul {
+            margin: 0;
+            padding-left: 1rem;
+        }
+
+        .quadruped-process-caption li + li {
+            margin-top: 0.2rem;
+        }
+
+        .quadruped-process-arrow {
+            position: absolute;
+            top: 50%;
+            right: -0.5rem;
+            z-index: 1;
+            color: var(--footer);
+            font-size: 1.25rem;
+            font-weight: 700;
+            pointer-events: none;
+            transform: translate(50%, -50%);
+        }
+
         @media (max-width: 520px) {
             .quadruped-previews {
                 gap: 0.5rem;
@@ -892,16 +989,25 @@
         <div class="club-project-list">
             <article class="club-project">
                 <header>
-                    <h3>Project Title</h3>
+                    <h3>MR1 Chassis</h3>
                     <p>My Title / role</p>
                 </header>
-                <p>Project overview</p>
-                <div>Project pictures / 3D model</div>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <figure class="quadruped-assembly-preview" id="mr1-chassis-preview" style="width:fit-content;max-width:100%;margin:0;overflow:hidden;border-radius:16px">
+                            <img src="elements/images/MR1%20Chassis.png" alt="MR1 Chassis" style="display:block;width:auto;max-width:100%;max-height:480px;object-fit:contain;border-radius:inherit;clip-path:inset(0 round 16px)">
+                        </figure>
+                        <div id="mr1-chassis-viewer" class="model-viewer" role="group" aria-label="Interactive MR1 Chassis model" tabindex="0" data-model-src="elements/models/MR1%20Chassis.glb" hidden></div>
+                        <button class="cta-button primary quadruped-model-toggle" id="mr1-chassis-toggle" type="button" aria-expanded="false">Show 3D model</button>
+                    </div>
+                    <p id="mr1-chassis-status" role="status" style="margin-top:.5rem;color:var(--muted)" hidden>Loading MR1 Chassis model...</p>
+                </div>
+                <p style="font-size:0.9rem">Project overview</p>
                 <div class="club-subprojects">
                     <article class="club-subproject">
                         <h4>Subproject / Assembly Title</h4>
-                        <p>Subproject overview</p>
                         <div>Subproject pictures / 3D model</div>
+                        <p style="font-size:0.9rem">Subproject overview</p>
                     </article>
                 </div>
             </article>
@@ -909,28 +1015,30 @@
     </div>
 
     <div id="robotics-club" class="section">
-        <h2>UMass Robotics Club</h2>
+        <h2 style="font-size:2rem;margin-bottom:1.25rem">UMass Robotics Club</h2>
         <div class="club-project-list">
             <article class="club-project">
                 <header>
-                    <h3>Project Title</h3>
-                    <p>My Title / role</p>
+                    <h3 style="font-size:1.6rem;margin-bottom:0.75rem">Quadruped Robot</h3>
                 </header>
-                <p>Project overview</p>
                 <div class="quadruped-showcase">
                     <div class="quadruped-media quadruped-assembly-media">
                         <figure id="quadruped-assembly-preview" style="width:fit-content;max-width:100%;margin:0;overflow:hidden;border-radius:16px">
-                            <img src="elements/images/Full%20Quadruped%20Raising%20Arm.png" alt="Full quadruped raising arm assembly" style="display:block;width:auto;max-width:100%;max-height:620px;object-fit:contain;border-radius:inherit;clip-path:inset(0 round 16px)">
+                            <img src="elements/images/Full%20Quadruped%20Raising%20Arm.png" alt="Full quadruped raising arm assembly" style="display:block;width:auto;max-width:100%;max-height:480px;object-fit:contain;border-radius:inherit;clip-path:inset(0 round 16px)">
                         </figure>
                         <div id="assembly-model-viewer" class="model-viewer" role="group" aria-label="Interactive full quadruped assembly model" tabindex="0" data-model-src="elements/models/Quadruped%20Full%20Assembly.glb" hidden></div>
-                        <button class="cta-button primary quadruped-model-toggle" id="assembly-model-toggle" type="button" aria-expanded="false">Show 3D model</button>
+                        <button class="cta-button primary quadruped-model-toggle" id="assembly-model-toggle" type="button" aria-expanded="false" disabled hidden>Show 3D model</button>
                     </div>
                     <p id="assembly-model-status" role="status" style="margin-top:.5rem;color:var(--muted)" hidden>Loading full assembly model...</p>
                 </div>
-                <div class="club-subprojects">
+                <ul style="font-size:0.9rem;line-height:1.6;padding-left:1.25rem">
+                    <li style="margin-bottom:.55rem">Working alongside a group of interdisciplinary engineers, we designed a quadruped robot for the pursuit of research. Many of the design decisions focused on reducing cost, while keeping the robot dextrous.</li>
+                    <li style="margin-bottom:.55rem">Many challenges came about when dealing with such a low budget. One of which was motor cost, where the Robstride 02 were selected for their general affordability, combined with moderate torque output, good backdrivability, and dual encoder setup.</li>
+                    <li>Due to having a motor with limited torque, weight became a critical factor in order for the robot to hold up its own weight with one leg. This required very careful material selection and making difficult trade-offs.</li>
+                </ul>
+                <div class="club-subprojects" style="margin-top:1.25rem">
                     <article class="club-subproject">
-                        <h4>Quadruped Leg</h4>
-                        <p>Subproject overview</p>
+                        <h4 style="font-size:1.3rem;margin-bottom:1rem">Quadruped Leg</h4>
                         <div class="quadruped-showcase">
                             <div class="quadruped-media">
                                 <div class="quadruped-previews" id="quadruped-previews">
@@ -940,13 +1048,72 @@
                                     </figure>
                                     <figure>
                                         <img id="quadruped-preview-opposite" alt="Quadruped leg, opposite side view" />
-                                        <div id="model-viewer" class="model-viewer" role="group" aria-label="Interactive quadruped leg model" tabindex="0" data-model-src="elements/models/test-model.glb" hidden></div>
+                                        <div id="model-viewer" class="model-viewer" role="group" aria-label="Interactive quadruped leg model" tabindex="0" data-model-src="elements/models/Quadruped%20Leg.glb" hidden></div>
                                         <figcaption>Opposite side</figcaption>
                                     </figure>
                                 </div>
                                 <button class="cta-button primary quadruped-model-toggle" id="quadruped-model-toggle" type="button" aria-expanded="false" disabled>Show 3D model</button>
                             </div>
                             <p id="model-viewer-status" role="status" style="margin-top:.5rem;color:var(--muted)">Preparing model views...</p>
+                        </div>
+                        <ul style="font-size:0.9rem;line-height:1.6;padding-left:1.25rem">
+                            <li style="margin-bottom:.55rem">I was responsible for leading the mechanical design of the quadruped's legs, ensuring they were lightweight, but robust enough to hold up the robot's mass.</li>
+                            <li style="margin-bottom:.55rem">The design needed to be manufactured in-house, which imposed additional constraints. This was settled through using a combination of FDM printing with PETG for complex geometry, along with 1/8" aluminum plates for rigidity and impact resistance.
+                                A carbon fiber tube was used for the "calf," which has great weight and plenty of  compressive strength for its use-case.</li>
+                            <li>A symmetrical four-bar linkage was used to transfer rotation across the leg. This was both cheap, space efficient, and easy to simulate on MuJoCo.</li>
+                        </ul>
+                        <h5 style="font-size:1.1rem;margin:1.25rem 0 .75rem">Design Process</h5>
+                        <div class="quadruped-design-process-scroll">
+                            <div class="quadruped-design-process" role="group" aria-label="Quadruped Leg design process">
+                                <figure class="quadruped-design-step">
+                                    <div class="quadruped-process-visual">
+                                        <img class="quadruped-process-image" src="elements/images/Leg%20Step%201.png" alt="Quadruped leg design process, step 1" />
+                                        <span class="quadruped-process-arrow" aria-hidden="true">→</span>
+                                    </div>
+                                    <figcaption class="quadruped-process-caption">
+                                        <p class="quadruped-process-title">Initial Design</p>
+                                        <ul><li>Add step description</li></ul>
+                                    </figcaption>
+                                </figure>
+                                <figure class="quadruped-design-step">
+                                    <div class="quadruped-process-visual">
+                                        <img class="quadruped-process-image" src="elements/images/Leg%20Step%202.png" alt="Quadruped leg design process, step 2" />
+                                        <span class="quadruped-process-arrow" aria-hidden="true">→</span>
+                                    </div>
+                                    <figcaption class="quadruped-process-caption">
+                                        <p class="quadruped-process-title">2nd Design</p>
+                                        <p class="quadruped-process-list-label">Improvements</p>
+                                        <ul><li>No pinch points</li><li>Stronger</li></ul>
+                                        <p class="quadruped-process-list-label">Sacrifices</p>
+                                        <ul><li>Weight</li></ul>
+                                    </figcaption>
+                                </figure>
+                                <figure class="quadruped-design-step">
+                                    <div class="quadruped-process-visual">
+                                        <img class="quadruped-process-image" src="elements/images/Leg%20Step%203.png" alt="Quadruped leg design process, step 3" />
+                                        <span class="quadruped-process-arrow" aria-hidden="true">→</span>
+                                    </div>
+                                    <figcaption class="quadruped-process-caption">
+                                        <p class="quadruped-process-title">3rd Design</p>
+                                        <p class="quadruped-process-list-label">Improvements</p>
+                                        <ul><li>Stair mobility (curved leg)</li><li>Weight</li><li>Range of motion</li></ul>
+                                        <p class="quadruped-process-list-label">Sacrifices</p>
+                                        <ul><li>Impact resistance</li><li>Small pinch point</li></ul>
+                                    </figcaption>
+                                </figure>
+                                <figure class="quadruped-design-step">
+                                    <div class="quadruped-process-visual">
+                                        <img class="quadruped-process-image" src="elements/images/Leg%20Step%204.png" alt="Quadruped leg design process, step 4" />
+                                    </div>
+                                    <figcaption class="quadruped-process-caption">
+                                        <p class="quadruped-process-title">Final Design</p>
+                                        <p class="quadruped-process-list-label">Improvements</p>
+                                        <ul><li>Impact resistance</li><li>Weight</li><li>Range of motion</li></ul>
+                                        <p class="quadruped-process-list-label">Sacrifices</p>
+                                        <ul><li>Complexity</li><li>Cost</li></ul>
+                                    </figcaption>
+                                </figure>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -1002,21 +1169,21 @@
     <footer class="site-footer">
         <details class="footer-disclosure" id="contact-disclosure">
             <summary class="footer-toggle">
-                <span class="footer-left">Your Name Here</span>
-                <span class="footer-toggle-label">Contact info</span>
+                <span class="footer-left">Marco Vital</span>
+                <span class="footer-toggle-label">Contact Info:</span>
             </summary>
             <div class="footer-right">
             <div class="contact-row">
-                <a class="contact-button" href="mailto:you@example.com" aria-label="Email">
+                <a class="contact-button" href="mailto:marcojvital@gmail.com" aria-label="Email">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </a>
-                <div class="contact-text"><a href="mailto:you@example.com">you@example.com</a></div>
+                <div class="contact-text"><a href="mailto:marcojvital@gmail.com">marcojvital@gmail.com</a></div>
             </div>
             <div class="contact-row">
-                <a class="contact-button" href="tel:+1234567890" aria-label="Call">
+                <a class="contact-button" href="tel:+14133357760" aria-label="Call">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.6 10.8c1.2 2.3 3 4.1 5.3 5.3l1.6-1.6c.2-.2.5-.3.8-.2 1 .3 2 .5 3 .5.4 0 .8.3.8.7V20c0 .4-.3.8-.7.8-9.9 0-18-8.1-18-18 0-.4.4-.7.8-.7h3.4c.4 0 .7.3.7.8 0 1 .2 2 .5 3 .1.3 0 .6-.2.8L6.6 10.8z"/></svg>
                 </a>
-                <div class="contact-text"><a href="tel:+1234567890">+1 (234) 567-890</a></div>
+                <div class="contact-text"><a href="tel:+14133357760">(413)-335-7760</a></div>
             </div>
             <div class="contact-row">
                 <a class="contact-button" href="https://www.linkedin.com/in/marco-vital" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
@@ -1051,6 +1218,10 @@
         const fullAssemblyStatus = document.getElementById('assembly-model-status');
         const fullAssemblyPreview = document.getElementById('quadruped-assembly-preview');
         const fullAssemblyToggle = document.getElementById('assembly-model-toggle');
+        const mr1Container = document.getElementById('mr1-chassis-viewer');
+        const mr1Preview = document.getElementById('mr1-chassis-preview');
+        const mr1Status = document.getElementById('mr1-chassis-status');
+        const mr1Toggle = document.getElementById('mr1-chassis-toggle');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1000);
         const pixelRatio = Math.min(window.devicePixelRatio, 2);
@@ -1088,6 +1259,13 @@
         let fullAssemblyRenderFrame = null;
         let fullAssemblyLoaded = false;
         let fullAssemblyLoading = false;
+        let mr1Scene = null;
+        let mr1Camera = null;
+        let mr1Renderer = null;
+        let mr1Controls = null;
+        let mr1RenderFrame = null;
+        let mr1Loaded = false;
+        let mr1Loading = false;
 
         function resizeViewer() {
             const width = container.clientWidth;
@@ -1130,6 +1308,21 @@
             stopFullAssemblyRendering();
         }
 
+        function stopMr1Rendering() {
+            if (mr1RenderFrame !== null) {
+                cancelAnimationFrame(mr1RenderFrame);
+                mr1RenderFrame = null;
+            }
+        }
+
+        function closeMr1Model() {
+            mr1Container.hidden = true;
+            mr1Preview.querySelector('img').style.visibility = 'visible';
+            mr1Toggle.setAttribute('aria-expanded', 'false');
+            mr1Toggle.textContent = 'Show 3D model';
+            stopMr1Rendering();
+        }
+
         function renderFullAssembly() {
             if (fullAssemblyContainer.hidden || fullAssemblyRenderFrame !== null) return;
             fullAssemblyRenderFrame = requestAnimationFrame(() => {
@@ -1139,6 +1332,102 @@
         }
         fullAssemblyControls.addEventListener('change', renderFullAssembly);
 
+        function renderMr1Model() {
+            if (mr1Container.hidden || !mr1Renderer || mr1RenderFrame !== null) return;
+            mr1RenderFrame = requestAnimationFrame(() => {
+                mr1RenderFrame = null;
+                if (!mr1Container.hidden) mr1Renderer.render(mr1Scene, mr1Camera);
+            });
+        }
+
+        function resizeMr1Model() {
+            if (!mr1Renderer || mr1Container.hidden) return;
+            const width = mr1Container.clientWidth;
+            const height = mr1Container.clientHeight;
+            if (!width || !height) return;
+            mr1Renderer.setSize(width, height, false);
+            mr1Camera.aspect = width / height;
+            mr1Camera.updateProjectionMatrix();
+            renderMr1Model();
+        }
+
+        function loadMr1Model() {
+            if (mr1Loading || mr1Loaded) return;
+            mr1Loading = true;
+            mr1Status.hidden = false;
+            mr1Status.textContent = 'Loading MR1 Chassis model...';
+
+            if (!mr1Renderer) {
+                mr1Scene = new THREE.Scene();
+                mr1Camera = new THREE.PerspectiveCamera(35, 1, 0.01, 1000);
+                mr1Renderer = new THREE.WebGLRenderer({antialias: true});
+                mr1Renderer.setPixelRatio(Math.min(pixelRatio, 1.25));
+                mr1Renderer.outputColorSpace = THREE.SRGBColorSpace;
+                mr1Renderer.setClearColor(0xe6ebef);
+                mr1Container.appendChild(mr1Renderer.domElement);
+                mr1Scene.add(new THREE.HemisphereLight(0xffffff, 0x68747a, 1.5));
+                const chassisKeyLight = new THREE.DirectionalLight(0xffffff, 2);
+                chassisKeyLight.position.set(-4, 6, -5);
+                mr1Scene.add(chassisKeyLight);
+                mr1Controls = new OrbitControls(mr1Camera, mr1Renderer.domElement);
+                mr1Controls.enableDamping = false;
+                mr1Controls.autoRotate = false;
+                mr1Controls.addEventListener('change', renderMr1Model);
+                new ResizeObserver(resizeMr1Model).observe(mr1Container);
+                window.addEventListener('resize', resizeMr1Model);
+            }
+
+            new GLTFLoader().load(
+                mr1Container.dataset.modelSrc,
+                ({scene: model}) => {
+                    const bounds = new THREE.Box3().setFromObject(model);
+                    const center = bounds.getCenter(new THREE.Vector3());
+                    const size = bounds.getSize(new THREE.Vector3());
+                    const radius = Math.max(size.length() / 2, 0.01);
+                    model.position.sub(center);
+
+                    const edgeMaterial = new THREE.LineBasicMaterial({
+                        color: 0x263238,
+                        transparent: true,
+                        opacity: 0.85,
+                        depthWrite: false,
+                        toneMapped: false
+                    });
+                    model.traverse(object => {
+                        if (!object.isMesh) return;
+                        const edges = new THREE.EdgesGeometry(object.geometry, 30);
+                        const lines = new THREE.LineSegments(edges, edgeMaterial);
+                        lines.renderOrder = 1;
+                        object.add(lines);
+                    });
+
+                    mr1Scene.add(model);
+                    const distance = radius / Math.sin(THREE.MathUtils.degToRad(mr1Camera.fov / 2)) * 0.8;
+                    mr1Camera.position.set(distance * 0.65, distance * 0.45, distance * 0.65);
+                    mr1Camera.near = radius / 100;
+                    mr1Camera.far = radius * 100;
+                    mr1Camera.updateProjectionMatrix();
+                    mr1Controls.target.set(0, 0, 0);
+                    mr1Controls.update();
+                    mr1Loaded = true;
+                    mr1Loading = false;
+                    mr1Status.hidden = true;
+                    if (!mr1Container.hidden) resizeMr1Model();
+                },
+                undefined,
+                () => {
+                    mr1Loading = false;
+                    mr1Status.hidden = false;
+                    mr1Status.textContent = 'Unable to load the MR1 Chassis model.';
+                    mr1Container.hidden = true;
+                    mr1Preview.querySelector('img').style.visibility = 'visible';
+                    mr1Toggle.setAttribute('aria-expanded', 'false');
+                    mr1Toggle.textContent = 'Try 3D model again';
+                    stopMr1Rendering();
+                }
+            );
+        }
+
         new ResizeObserver(resizeViewer).observe(container);
         new ResizeObserver(resizeFullAssemblyViewer).observe(fullAssemblyContainer);
         window.addEventListener('resize', resizeViewer);
@@ -1146,7 +1435,10 @@
 
         modelToggle.addEventListener('click', () => {
             const showModel = container.hidden;
-            if (showModel) closeFullAssemblyModel();
+            if (showModel) {
+                closeFullAssemblyModel();
+                closeMr1Model();
+            }
             container.hidden = !showModel;
             oppositePreviewImage.hidden = showModel;
             modelToggle.setAttribute('aria-expanded', String(showModel));
@@ -1158,6 +1450,7 @@
             const showModel = fullAssemblyContainer.hidden;
             if (showModel) {
                 closeLegModel();
+                closeMr1Model();
                 fullAssemblyContainer.hidden = false;
                 fullAssemblyPreview.querySelector('img').style.visibility = 'hidden';
                 fullAssemblyToggle.setAttribute('aria-expanded', 'true');
@@ -1170,6 +1463,23 @@
                 });
             } else {
                 closeFullAssemblyModel();
+            }
+        });
+
+        mr1Toggle.addEventListener('click', () => {
+            const showModel = mr1Container.hidden;
+            if (showModel) {
+                closeLegModel();
+                closeFullAssemblyModel();
+                mr1Container.hidden = false;
+                mr1Preview.querySelector('img').style.visibility = 'hidden';
+                mr1Toggle.setAttribute('aria-expanded', 'true');
+                mr1Toggle.textContent = 'Show image';
+                mr1Status.hidden = mr1Loaded;
+                loadMr1Model();
+                requestAnimationFrame(resizeMr1Model);
+            } else {
+                closeMr1Model();
             }
         });
 
@@ -1238,6 +1548,7 @@
         );
 
         function loadFullAssemblyModel() {
+            /* Temporarily disabled while the full assembly model is being optimized.
             fullAssemblyLoading = true;
             fullAssemblyStatus.hidden = false;
             fullAssemblyStatus.textContent = 'Loading full assembly model...';
@@ -1300,6 +1611,7 @@
                     stopFullAssemblyRendering();
                 }
             );
+            */
         }
 
         function render() {
@@ -1412,23 +1724,39 @@
 
         allCategories.forEach(category => {
             category.querySelector('summary').addEventListener('click', () => {
-                if (category.open) return;
-                const categoriesToClose = window.matchMedia('(max-width: 900px)').matches ? allCategories : desktopCategories;
-                categoriesToClose.forEach(other => {
-                    if (other !== category) other.open = false;
-                });
+                const isMobile = window.matchMedia('(max-width: 600px)').matches;
+                const isBurgerCategory = category.closest('.nav-links');
+
+                if (category.open) {
+                    if (isMobile && isBurgerCategory) mainNav.classList.remove('category-open');
+                    return;
+                }
+
+                const categoriesToClose = isMobile ? allCategories : desktopCategories;
+                categoriesToClose.forEach(other => { if (other !== category) other.open = false; });
+
+                if (isMobile) {
+                    if (isBurgerCategory) {
+                        mainNav.classList.remove('is-open');
+                        mainNav.classList.add('category-open');
+                    } else {
+                        mainNav.classList.remove('is-open', 'category-open');
+                    }
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navToggle.setAttribute('aria-label', 'Open navigation');
+                }
             });
         });
 
         function closeNavigation() {
-            mainNav.classList.remove('is-open');
+            mainNav.classList.remove('is-open', 'category-open');
             navToggle.setAttribute('aria-expanded', 'false');
             navToggle.setAttribute('aria-label', 'Open navigation');
             mainNav.querySelectorAll('.nav-category[open]').forEach(group => { group.open = false; });
         }
 
         function fitMobileNavigation() {
-            const isMobile = window.matchMedia('(max-width: 900px)').matches;
+            const isMobile = window.matchMedia('(max-width: 600px)').matches;
             const shortcutBar = mainNav.querySelector('.nav-mobile-shortcuts');
             const shortcuts = [...shortcutBar.children];
             const fullItems = [...mainNav.querySelector('.nav-links').children];
@@ -1463,6 +1791,10 @@
         fitMobileNavigation();
 
         navToggle.addEventListener('click', () => {
+            if (mainNav.classList.contains('category-open')) {
+                mainNav.classList.remove('category-open');
+                mainNav.querySelectorAll('.nav-links > .nav-category[open]').forEach(category => { category.open = false; });
+            }
             const isOpen = mainNav.classList.toggle('is-open');
             navToggle.setAttribute('aria-expanded', String(isOpen));
             navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
@@ -1472,7 +1804,7 @@
         });
 
         document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && mainNav.classList.contains('is-open')) {
+            if (event.key === 'Escape' && (mainNav.classList.contains('is-open') || mainNav.classList.contains('category-open'))) {
                 closeNavigation();
                 navToggle.focus();
             }
@@ -1588,7 +1920,7 @@
                             label.style.position = 'absolute';
                             label.style.left = 'calc(50% + 4px)';
                             label.style.top = (yearPosPx - 10) + 'px';
-                            label.style.fontSize = '0.95rem';
+                            label.style.fontSize = '1.15rem';
                             label.style.fontWeight = '700';
                             label.style.color = '#000000';
                             label.textContent = y;
@@ -1601,7 +1933,7 @@
                                 small.style.position = 'absolute';
                                 small.style.left = 'calc(50% + 4px)';
                                 small.style.top = (posPx - 8) + 'px';
-                                small.style.fontSize = '0.75rem';
+                                small.style.fontSize = '0.9rem';
                                 small.style.color = 'var(--muted)';
                                 small.textContent = seasons[s];
                                 line.appendChild(small);
