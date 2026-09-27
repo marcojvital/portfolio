@@ -66,7 +66,7 @@
 
         .page-scrollbar-control:disabled {
             cursor: default;
-            opacity: 0.45;
+            opacity: 1;
         }
 
         .page-scrollbar-control:focus-visible {
@@ -87,7 +87,7 @@
         }
 
         .page-scrollbar-up::before {
-            border-bottom: 5px solid var(--nav);
+            border-bottom: 5px solid var(--footer);
         }
 
         .page-scrollbar-down {
@@ -95,7 +95,7 @@
         }
 
         .page-scrollbar-down::before {
-            border-top: 5px solid var(--nav);
+            border-top: 5px solid var(--footer);
         }
 
         .page-scrollbar-thumb {
@@ -111,6 +111,14 @@
 
         .page-scrollbar:hover .page-scrollbar-thumb {
             background: var(--nav);
+        }
+
+        .page-scrollbar:hover .page-scrollbar-up::before {
+            border-bottom-color: var(--nav);
+        }
+
+        .page-scrollbar:hover .page-scrollbar-down::before {
+            border-top-color: var(--nav);
         }
 
         .page-scrollbar:focus-visible {
@@ -203,7 +211,7 @@
             margin-left: auto;
             display: flex;
             justify-content: flex-end;
-            gap: 0.75rem;
+            gap: 1rem;
             align-items: center;
             overflow: visible;
         }
@@ -229,6 +237,12 @@
             outline: none;
         }
 
+        nav a.nav-current,
+        nav .nav-category.nav-current > summary {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
         .nav-category {
             position: relative;
             flex: 0 0 auto;
@@ -237,7 +251,7 @@
         .nav-category > summary {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 6px;
             padding: 0.25rem 0.5rem;
             border-radius: 8px;
             font-weight: 700;
@@ -292,7 +306,7 @@
 
         .header {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: space-between;
             padding: 2rem;
             gap: 1rem;
@@ -310,7 +324,11 @@
             font-size: 0.9rem;
             color: rgba(43,43,43,0.85);
             margin-bottom: 0.25rem;
-            font-weight: 300;
+            font-weight: 700;
+        }
+
+        .subtitle + .subtitle {
+            margin-top: -0.25rem;
         }
 
         .header h1 {
@@ -320,17 +338,46 @@
         }
 
         .header img {
-            width: 140px;
-            height: 140px;
+            width: 299px;
+            height: 299px;
             border-radius: 12px;
             object-fit: cover;
             flex-shrink: 0;
         }
 
+        .header-profile-mobile {
+            display: none;
+        }
+
         .cta-buttons {
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             display: flex;
             gap: 0.6rem;
+        }
+
+        .current-position-label {
+            margin-top: 0.75rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .home-memberships {
+            margin-top: 1.15rem;
+        }
+
+        .home-memberships-label {
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .home-membership-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
         }
 
         .cta-button {
@@ -516,6 +563,13 @@
             padding: 2rem 1rem 2rem 0;
         }
 
+        .timeline-help {
+            margin-left: 52.5px;
+            margin-bottom: 0.75rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
         /* Timeline layout */
         .timeline-wrap {
             display: flex;
@@ -601,6 +655,14 @@
             outline-offset: 2px;
         }
 
+        .timeline-dialog-link[hidden] {
+            display: none;
+        }
+
+        .timeline-dialog-link {
+            margin-top: 1rem;
+        }
+
         .timeline-dialog-body:empty,
         .timeline-dialog-subtitle:empty {
             display: none;
@@ -608,6 +670,70 @@
         
         .section.active {
             display: block;
+        }
+
+        .home-skills {
+            margin-top: 1.5rem;
+        }
+
+        .section-overview {
+            max-width: 760px;
+            margin: 0.5rem 0 1.25rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .home-about {
+            max-width: 760px;
+            margin: 1.5rem auto 0;
+        }
+
+        .home-about h2 {
+            margin-bottom: 0.4rem;
+            font-size: 1.25rem;
+        }
+
+        .home-about p {
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.55;
+        }
+
+        .home-skills h2 {
+            margin-bottom: 0.65rem;
+            font-size: 1.25rem;
+        }
+
+        .home-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .home-skill-group {
+            padding: 0.7rem 0.85rem;
+            border-left: 3px solid var(--primary);
+            background: rgba(255,255,255,0.72);
+        }
+
+        .home-skill-group h3 {
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .home-skill-group ul {
+            padding-left: 1rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 600px) {
+            .home-skills-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
         }
 
         @media (max-width: 600px) {
@@ -620,7 +746,9 @@
                 flex: 1;
                 min-width: 0;
                 align-items: center;
-                gap: 0.25rem;
+                justify-content: flex-end;
+                gap: 0.5rem;
+                margin-right: 0.5rem;
                 overflow: visible;
             }
 
@@ -629,7 +757,7 @@
                 display: flex;
                 flex: 0 0 auto;
                 align-items: center;
-                gap: 12px;
+                gap: 6px;
                 margin: 0;
                 padding: 0.25rem 0.2rem;
                 white-space: nowrap;
@@ -737,6 +865,14 @@
                 display: none;
             }
 
+            nav.category-open .nav-links > a[onclick="showSection('timeline')"] {
+                display: block;
+            }
+
+            nav.all-shortcuts-fit .nav-toggle {
+                display: none;
+            }
+
             nav a {
                 display: block;
             }
@@ -770,7 +906,7 @@
 
         .quadruped-previews .model-viewer {
             height: auto;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1;
         }
 
         .quadruped-showcase {
@@ -808,11 +944,17 @@
             z-index: 2;
         }
 
+        .quadruped-previews + .quadruped-model-toggle {
+            top: 0.75rem;
+            right: calc(12.5% + 0.75rem);
+        }
+
         .quadruped-previews {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1rem;
-            margin-bottom: 1rem;
+            width: 75%;
+            margin: 0 auto 1rem;
         }
 
         .quadruped-previews figure {
@@ -822,7 +964,7 @@
         .quadruped-previews img {
             display: block;
             width: 100%;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1;
             object-fit: contain;
             border-radius: 8px;
             background: var(--viewer-bg);
@@ -830,6 +972,26 @@
 
         .quadruped-previews img[hidden] {
             display: none;
+        }
+
+        @media (max-width: 600px) {
+            .quadruped-previews {
+                width: 100%;
+            }
+
+            .quadruped-previews + .quadruped-model-toggle {
+                position: static;
+                display: block;
+                margin: 0.75rem auto 0;
+            }
+
+            #model-viewer-status {
+                margin-top: 1rem !important;
+            }
+
+            .quadruped-leg-project > ul {
+                margin-top: 1rem !important;
+            }
         }
 
         .quadruped-previews figcaption {
@@ -842,6 +1004,26 @@
             max-width: 100%;
             overflow-x: auto;
             overscroll-behavior-inline: contain;
+            scrollbar-width: thin;
+            scrollbar-color: var(--footer) var(--bg);
+        }
+
+        .quadruped-design-process-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .quadruped-design-process-scroll::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        .quadruped-design-process-scroll::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            background: var(--footer);
+        }
+
+        .quadruped-design-process-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--nav);
         }
 
         .quadruped-design-process {
@@ -939,6 +1121,7 @@
                     <a onclick="showSection('robotics-club')">UMass Robotics Club</a>
                 </div>
             </details>
+            <a onclick="showSection('timeline')">Timeline</a>
         </div>
         <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
             <span aria-hidden="true"></span>
@@ -961,7 +1144,6 @@
                     <a onclick="showSection('robotics-club')">UMass Robotics Club</a>
                 </div>
             </details>
-            <a onclick="showSection('skills')">Skills</a>
             <a onclick="showSection('timeline')">Timeline</a>
         </div>
     </nav>
@@ -969,28 +1151,168 @@
     <div id="home" class="section active">
         <div class="header">
             <div class="header-left">
-                <p class="subtitle">Placeholder subtitle</p>
-                <h1>Your Name Here</h1>
+                <p class="subtitle">B.S Mechanical Engineering @ UMass Amherst</p>
+                <p class="subtitle">Expected Graduation: Spring 2028</p>
+                <h1>Marco Vital</h1>
+                <img class="header-profile-mobile" src="elements/images/Profile%20Picture.jpeg" alt="Marco Vital profile portrait">
+                <p class="current-position-label">Current Position:</p>
                 <div class="cta-buttons">
-                    <button class="cta-button primary" onclick="showSection('boston-dynamics')">Current Position</button>
+                    <button class="cta-button primary" onclick="showSection('boston-dynamics')">Atlas Actuators Co-op at Boston Dynamics</button>
+                </div>
+                <div class="home-memberships">
+                    <p class="home-memberships-label">Member of:</p>
+                    <div class="home-membership-buttons">
+                        <button class="cta-button primary" onclick="showSection('robotics-club')">UMass Robotics Club</button>
+                        <button class="cta-button primary" onclick="showSection('formula-sae')">Minutemen Racing (FSAE Team)</button>
+                    </div>
                 </div>
             </div>
-            <img src="your-image.jpg" alt="Profile Picture">
+                <img src="elements/images/Profile%20Picture.jpeg" alt="Marco Vital profile portrait">
         </div>
+            <section class="home-about" aria-labelledby="home-about-title">
+                <h2 id="home-about-title">About Me</h2>
+                <p>I am a mechanical engineering student with a focus on robotics, automotive and gear trains.
+                    With my experience at Boston Dynamics, the UMass Mechatronic & Robotics Research Lab, and student clubs, I have developed strong design skills for complex assemblies.
+                    
+                </p>
+            </section>
+        <section class="home-skills" aria-labelledby="home-skills-title">
+            <h2 id="home-skills-title">Skills</h2>
+            <div class="home-skills-grid">
+                <div class="home-skill-group">
+                    <h3>Design</h3>
+                    <ul>
+                        <li>GD&T</li>
+                        <li>DFM</li>
+                        <li>DFA</li>
+                    </ul>
+                </div>
+                <div class="home-skill-group">
+                    <h3>Manufacturing</h3>
+                    <ul>
+                        <li>3D Printing (FDM, SLS, DMLS)</li>
+                        <li>CNC Mill</li>
+                        <li>Laser/Plasma Cutter</li>
+                        <li>Soldering</li>
+                    </ul>
+                </div>
+                <div class="home-skill-group">
+                    <h3>Software</h3>
+                    <ul>
+                        <li>CATIA</li>
+                        <li>SOLIDWORKS</li>
+                        <li>Onshape</li>
+                        <li>Ansys Mechanical</li>
+                        <li>3DEXPERIENCE</li>
+                        <li>KISSsoft</li>
+                        <li>Minitab</li>
+                    </ul>
+                </div>
+                <div class="home-skill-group">
+                    <h3>Programming</h3>
+                    <ul>
+                        <li>Java</li>
+                        <li>MATLAB</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 
     <div id="boston-dynamics" class="section">
-        <h2>Boston Dynamics Co-op</h2>
-        <p>Your Boston Dynamics Co-op projects and experience here</p>
+        <h2>Atlas Actuation Team Co-op at Boston Dynamics</h2>
+        <p class="section-overview">Section overview</p>
+        <div class="club-project-list">
+            <article class="club-project">
+                <header>
+                    <h3>Atlas Actuators</h3>
+                    <p>Actuation Co-op | Timespan</p>
+                </header>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <div>Project pictures / 3D model</div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem">Project overview</p>
+                <div class="club-subprojects">
+                    <article class="club-subproject">
+                        <h4>Subproject / Assembly Title</h4>
+                        <div>Subproject pictures / 3D model</div>
+                        <p style="font-size:0.9rem">Subproject overview</p>
+                    </article>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div id="emcnei" class="section">
+        <h2>Elaine Marieb Center for Nursing and Engineering Innovation</h2>
+        <p class="section-overview">Throughout my time at the Elaine Marieb Center, I worked closely with engineering and nursing graduate students to help solve problems that challenges nurses in hospitals everyday.
+        </p>
+        <div class="club-project-list">
+            <article class="club-project">
+                <header>
+                    <h3 style="margin-bottom:0">Dexterity Board</h3>
+                    <p>Research Assistant | Summer 2025</p>
+                </header>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <div>Project pictures / 3D model</div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem">During summer 2025, I worked toward making, and designing my own dexterity board. A dexterity board is a fixture used to determine the functionality of an end-effector in certain situations.
+                    The first project this summer was to build an existing dexterity board from <em>New Dexterity</em>, which 
+                </p>
+            </article>
+            <article class="club-project">
+                <header>
+                    <h3 style="margin-bottom:0">3D Scanner</h3>
+                    <p>Research Assistant | Summer 2024</p>
+                </header>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <div>Project pictures / 3D model</div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem">Project overview</p>
+            </article>
+            <article class="club-project">
+                <header>
+                    <h3 style="margin-bottom:0">Robot Grippers</h3>
+                    <p>High-School Research Assistant | Summer 2023</p>
+                </header>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <div>Project pictures / 3D model</div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem">Project overview</p>
+            </article>
+        </div>
     </div>
 
     <div id="formula-sae" class="section">
         <h2>Formula SAE</h2>
+        <p class="section-overview">Section overview</p>
         <div class="club-project-list">
             <article class="club-project">
                 <header>
-                    <h3>MR1 Chassis</h3>
-                    <p>My Title / role</p>
+                    <h3 style="margin-bottom:0">MR2 FSAE Car</h3>
+                    <p style="margin:0">My Title / role | Summer 2023 - Spring 2025</p>
+                </header>
+                <div class="quadruped-showcase">
+                    <div class="quadruped-media quadruped-assembly-media">
+                        <div>Project pictures / 3D model</div>
+                    </div>
+                </div>
+                <p style="font-size:0.9rem">Project overview</p>
+            </article>
+            <article class="club-project">
+                <header>
+                    <h3 style="margin-bottom:0">MR1 FSAE Car</h3>
+                    <p style="margin:0">Chassis Engineering Captain | Summer 2025 - Summer 2026</p>
+                    <p style="margin:0">Chassis Subteam Member | Fall 2024 - Spring 2025</p>
                 </header>
                 <div class="quadruped-showcase">
                     <div class="quadruped-media quadruped-assembly-media">
@@ -1005,7 +1327,7 @@
                 <p style="font-size:0.9rem">Project overview</p>
                 <div class="club-subprojects">
                     <article class="club-subproject">
-                        <h4>Subproject / Assembly Title</h4>
+                        <h4>Racing Seat</h4>
                         <div>Subproject pictures / 3D model</div>
                         <p style="font-size:0.9rem">Subproject overview</p>
                     </article>
@@ -1016,10 +1338,12 @@
 
     <div id="robotics-club" class="section">
         <h2 style="font-size:2rem;margin-bottom:1.25rem">UMass Robotics Club</h2>
+        <p class="section-overview">Section overview</p>
         <div class="club-project-list">
             <article class="club-project">
                 <header>
-                    <h3 style="font-size:1.6rem;margin-bottom:0.75rem">Quadruped Robot</h3>
+                    <h3 style="font-size:1.6rem;margin-bottom:0">Quadruped Robot</h3>
+                    <p style="margin:0">Leg Design Lead | Spring 2022 - Fall 2024</p>
                 </header>
                 <div class="quadruped-showcase">
                     <div class="quadruped-media quadruped-assembly-media">
@@ -1037,19 +1361,19 @@
                     <li>Due to having a motor with limited torque, weight became a critical factor in order for the robot to hold up its own weight with one leg. This required very careful material selection and making difficult trade-offs.</li>
                 </ul>
                 <div class="club-subprojects" style="margin-top:1.25rem">
-                    <article class="club-subproject">
+                    <article class="club-subproject quadruped-leg-project">
                         <h4 style="font-size:1.3rem;margin-bottom:1rem">Quadruped Leg</h4>
                         <div class="quadruped-showcase">
                             <div class="quadruped-media">
                                 <div class="quadruped-previews" id="quadruped-previews">
                                     <figure>
-                                        <img id="quadruped-preview-side" alt="Quadruped leg, side view" />
-                                        <figcaption>Side view</figcaption>
+                                        <img id="quadruped-preview-side" src="elements/images/Built%20Quadruped%20Leg.jpg" alt="Built quadruped leg" />
+                                        <figcaption>Built quadruped leg</figcaption>
                                     </figure>
                                     <figure>
-                                        <img id="quadruped-preview-opposite" alt="Quadruped leg, opposite side view" />
+                                        <img id="quadruped-preview-opposite" src="elements/images/Leg%20Step%204.png" alt="Quadruped leg final design" />
                                         <div id="model-viewer" class="model-viewer" role="group" aria-label="Interactive quadruped leg model" tabindex="0" data-model-src="elements/models/Quadruped%20Leg.glb" hidden></div>
-                                        <figcaption>Opposite side</figcaption>
+                                        <figcaption>Final design</figcaption>
                                     </figure>
                                 </div>
                                 <button class="cta-button primary quadruped-model-toggle" id="quadruped-model-toggle" type="button" aria-expanded="false" disabled>Show 3D model</button>
@@ -1121,11 +1445,6 @@
         </div>
     </div>
 
-    <div id="emcnei" class="section">
-        <h2>EMCNEI Internship</h2>
-        <p>Your EMCNEI Internship projects and contributions here</p>
-    </div>
-
     <style>
         /* Portrait / small screens: make profile image a rounded rectangle */
         @media (max-width: 600px) {
@@ -1134,11 +1453,61 @@
                 align-items: flex-start;
             }
 
+            .header-left {
+                align-self: stretch;
+                min-width: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .header-left > .subtitle {
+                width: calc(100% + 4rem);
+                margin-left: -2rem;
+                font-size: 0.8rem;
+                text-align: center;
+            }
+
             .header img {
                 width: 120px;
-                height: 160px;
+                height: 120px;
                 border-radius: 18px; /* rounded rectangle */
                 margin-top: 12px;
+            }
+
+            .header > img {
+                display: none;
+            }
+
+            .header .header-profile-mobile {
+                display: block;
+                width: clamp(240px, calc(100vw - 182px), 298px);
+                max-width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+                margin-top: 0.75rem;
+                margin-bottom: 0.25rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .header .cta-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .header .home-memberships {
+                width: 100%;
+            }
+
+            .header-left > h1,
+            .header-left > .current-position-label,
+            .header .home-memberships-label {
+                width: 100%;
+                text-align: center;
+            }
+
+            .header .home-membership-buttons {
+                align-items: center;
             }
         }
     </style>
@@ -1149,6 +1518,7 @@
     </div>
 
     <div id="timeline" class="section">
+        <p class="timeline-help">Click an event to open its details popup.</p>
         <div class="timeline-wrap">
             <div class="timeline-line" id="timeline-line"></div>
             <div class="timeline-events" id="timeline-events"></div>
@@ -1163,6 +1533,7 @@
             </div>
             <p class="timeline-dialog-subtitle" id="timeline-event-subtitle"></p>
             <p class="timeline-dialog-body" id="timeline-event-body"></p>
+            <button class="cta-button primary timeline-dialog-link" id="timeline-dialog-link" type="button" hidden>View project</button>
         </dialog>
     </div>
 
@@ -1208,10 +1579,7 @@
         const container = document.getElementById('model-viewer');
         const status = document.getElementById('model-viewer-status');
         const previewGallery = document.getElementById('quadruped-previews');
-        const previewImages = [
-            { image: document.getElementById('quadruped-preview-side'), x: 0.65, z: 0.65 },
-            { image: document.getElementById('quadruped-preview-opposite'), x: -0.65, z: 0.65 }
-        ];
+        const previewImages = [];
         const oppositePreviewImage = document.getElementById('quadruped-preview-opposite');
         const modelToggle = document.getElementById('quadruped-model-toggle');
         const fullAssemblyContainer = document.getElementById('assembly-model-viewer');
@@ -1255,7 +1623,8 @@
 
         const fullAssemblyControls = new OrbitControls(fullAssemblyCamera, fullAssemblyRenderer.domElement);
         fullAssemblyControls.enableDamping = false;
-        fullAssemblyControls.autoRotate = false;
+        fullAssemblyControls.autoRotate = true;
+        fullAssemblyControls.autoRotateSpeed = 1;
         let fullAssemblyRenderFrame = null;
         let fullAssemblyLoaded = false;
         let fullAssemblyLoading = false;
@@ -1327,7 +1696,10 @@
             if (fullAssemblyContainer.hidden || fullAssemblyRenderFrame !== null) return;
             fullAssemblyRenderFrame = requestAnimationFrame(() => {
                 fullAssemblyRenderFrame = null;
-                if (!fullAssemblyContainer.hidden) fullAssemblyRenderer.render(fullAssemblyScene, fullAssemblyCamera);
+                if (fullAssemblyContainer.hidden) return;
+                fullAssemblyControls.update();
+                fullAssemblyRenderer.render(fullAssemblyScene, fullAssemblyCamera);
+                if (fullAssemblyControls.autoRotate) renderFullAssembly();
             });
         }
         fullAssemblyControls.addEventListener('change', renderFullAssembly);
@@ -1336,7 +1708,10 @@
             if (mr1Container.hidden || !mr1Renderer || mr1RenderFrame !== null) return;
             mr1RenderFrame = requestAnimationFrame(() => {
                 mr1RenderFrame = null;
-                if (!mr1Container.hidden) mr1Renderer.render(mr1Scene, mr1Camera);
+                if (mr1Container.hidden) return;
+                mr1Controls.update();
+                mr1Renderer.render(mr1Scene, mr1Camera);
+                if (mr1Controls.autoRotate) renderMr1Model();
             });
         }
 
@@ -1371,7 +1746,8 @@
                 mr1Scene.add(chassisKeyLight);
                 mr1Controls = new OrbitControls(mr1Camera, mr1Renderer.domElement);
                 mr1Controls.enableDamping = false;
-                mr1Controls.autoRotate = false;
+                mr1Controls.autoRotate = true;
+                mr1Controls.autoRotateSpeed = 1;
                 mr1Controls.addEventListener('change', renderMr1Model);
                 new ResizeObserver(resizeMr1Model).observe(mr1Container);
                 window.addEventListener('resize', resizeMr1Model);
@@ -1442,7 +1818,7 @@
             container.hidden = !showModel;
             oppositePreviewImage.hidden = showModel;
             modelToggle.setAttribute('aria-expanded', String(showModel));
-            modelToggle.textContent = showModel ? 'Show pictures' : 'Show 3D model';
+            modelToggle.textContent = showModel ? 'Show image' : 'Show 3D model';
             if (showModel) requestAnimationFrame(resizeViewer);
         });
 
@@ -1781,6 +2157,8 @@
                 }
             });
 
+            mainNav.classList.toggle('all-shortcuts-fit', isMobile && !priorityOverflow);
+
             fullItems.forEach(item => {
                 const sections = item.dataset.sections?.split(',') || [item.getAttribute('onclick').match(/showSection\('([^']+)'\)/)[1]];
                 item.hidden = isMobile && sections.every(section => visibleSections.has(section));
@@ -1814,9 +2192,18 @@
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
+            mainNav.querySelectorAll('a, .nav-category').forEach(item => {
+                const sections = item.dataset.sections?.split(',') || [item.getAttribute('onclick')?.match(/showSection\('([^']+)'\)/)?.[1]];
+                const isCurrent = sections.includes(sectionId);
+                item.classList.toggle('nav-current', isCurrent);
+                if (item.matches('a')) item.setAttribute('aria-current', isCurrent ? 'page' : 'false');
+                else item.querySelector('summary')?.setAttribute('aria-current', isCurrent ? 'page' : 'false');
+            });
             closeNavigation();
             if (sectionId === 'timeline') window.renderTimeline?.();
         }
+
+        showSection('home');
         
         /* Timeline implementation
          - Add events with addTimelineEvent({start:{year,season}, end:{year,season}, title, subtitle, body, color})
@@ -2039,10 +2426,17 @@
             window.renderTimeline = renderTimeline;
 
             const eventDialog = document.getElementById('timeline-event-dialog');
+            const eventDialogLink = document.getElementById('timeline-dialog-link');
             function openTimelineEvent(event){
                 document.getElementById('timeline-event-title').textContent = event.title;
                 document.getElementById('timeline-event-subtitle').textContent = event.subtitle || '';
                 document.getElementById('timeline-event-body').textContent = event.body || '';
+                eventDialogLink.hidden = !event.sectionId;
+                eventDialogLink.textContent = event.sectionLabel ? `View ${event.sectionLabel}` : 'View project';
+                eventDialogLink.onclick = () => {
+                    eventDialog.close();
+                    showSection(event.sectionId);
+                };
                 eventDialog.showModal();
             }
 
@@ -2053,20 +2447,20 @@
 
             // public helper to add events easily
             window.addTimelineEvent = function(data){
-                // data: {start, end, title, subtitle, body, template, color, priority}
+                // data: {start, end, title, subtitle, body, template, color, priority, sectionId, sectionLabel}
                 const sUnit = toUnit(data.start.year, data.start.season);
                 const eUnit = toUnit(data.end.year, data.end.season) + 1; // make end exclusive
                 const template = timelineTemplates[data.template];
                 const priority = Number.isFinite(data.priority) ? data.priority : 3;
-                events.push({start:sUnit, end:eUnit, title:data.title, subtitle:data.subtitle, body:data.body, color:data.color || template?.color, priority, order:events.length});
+                events.push({start:sUnit, end:eUnit, title:data.title, subtitle:data.subtitle, body:data.body, color:data.color || template?.color, priority, sectionId:data.sectionId, sectionLabel:data.sectionLabel, order:events.length});
                 renderTimeline();
             }
 
             // sample events (three overlapping)
             addTimelineEvent = window.addTimelineEvent; // expose short name
-            addTimelineEvent({start:{year:2022,season:'Spring'}, end:{year:2024,season:'Fall'}, title:'Robotics', subtitle:'Team project', body:'Robotics template example.', template:'robotics', priority:2});
-            addTimelineEvent({start:{year:2023,season:'Summer'}, end:{year:2025,season:'Spring'}, title:'FSAE', subtitle:'Engineering team', body:'FSAE template example.', template:'fsae', priority:2});
-            addTimelineEvent({start:{year:2026,season:'Spring'}, end:{year:2026,season:'Winter'}, title:'Boston Dynamics', subtitle:'Robotics', body:'Boston Dynamics template example.', template:'bostonDynamics', priority:3});
+            addTimelineEvent({start:{year:2022,season:'Spring'}, end:{year:2024,season:'Fall'}, title:'Quadruped Robot', subtitle:'Team project', body:'Robotics template example.', template:'robotics', priority:2, sectionId:'robotics-club', sectionLabel:'Quadruped Robot'});
+            addTimelineEvent({start:{year:2023,season:'Summer'}, end:{year:2025,season:'Spring'}, title:'FSAE', subtitle:'Engineering team', body:'FSAE template example.', template:'fsae', priority:2, sectionId:'formula-sae', sectionLabel:'Formula SAE'});
+            addTimelineEvent({start:{year:2026,season:'Spring'}, end:{year:2026,season:'Winter'}, title:'Boston Dynamics', subtitle:'Robotics', body:'Boston Dynamics template example.', template:'bostonDynamics', priority:3, sectionId:'boston-dynamics', sectionLabel:'Boston Dynamics'});
             addTimelineEvent({start:{year:2022,season:'Spring'}, end:{year:2026,season:'Winter'}, title:'Cardinal Coders', subtitle:'Software team', body:'Cardinal Coders template example.', template:'cardinalCoders', priority:2});
             // additional non-overlapping sample
             addTimelineEvent({start:{year:2022,season:'Fall'}, end:{year:2023,season:'Spring'}, title:'UMass', subtitle:'School', body:'UMass template example.', template:'umass', priority:1});
